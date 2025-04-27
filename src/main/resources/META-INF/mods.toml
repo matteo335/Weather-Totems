@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[46,)"
+license = "MIT License"
+
+[[mods]]
+modId="weather_totems"
+version="1.20.1-0.0"
+displayName="Weather Totems"
+logoFile = "logo.png"
+credits = "Silver Chariot (for the idea)"
+authors = "Mattéo"
+description= '''
+Add a totem to the game which affect weather
+It's my very first public mod btw
+'''
+
+[[dependencies.weather_totems]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47.1.0,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.weather_totems]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="1.20.1"
+    ordering="NONE"
+    side="BOTH"

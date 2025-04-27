@@ -1,0 +1,83 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    //id 'net.neoforged.gradle' version '[6.0.18,6.2)'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.parchmentmc.librarian.forgegradle' version '1+'
+}
+
+base {
+    archivesName = "${mod_id}-${minecraft_version}"
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: mapping_channel, version: mapping_version
+
+    accessTransformer = file('src/main/resources/META_INF/accesstransformer.cfg')
+
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.console.level', 'debug'
+            property 'fml.earlyprogresswindow', 'false'
+            property 'mixin.env.disableRefMap', 'true'
+
+            mods {
+            "${mod_id}" {
+                source sourceSets.main
+            }
+        }
+    }
+
+        client {
+            taskName "Minecraft_Client_${minecraft_version}"
+            property 'forge.enabledGameTestNamespaces', mod_id
+        }
+
+        gameTestServer {
+            taskName "Minecraft_GameTestServer_${minecraft_version}"
+            property "forge.enabledGameTestNamespaces", mod_id
+        }
+
+        data {
+            taskName "Minecraft_Data_${minecraft_version}"
+            workingDirectory project.file('run-data')
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
+        }
+
+        sourceSets.main.resources { srcDir 'src/genearted/resources' }
+
+        respositories {}
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        archiveClassifier = 'universal'
+        attributes([
+                'Specification-Title': mod_id,
+                'Specification-Vendor': "Matteo",
+                'Specification-Version': "1",
+                'Implementation-Timestap': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+
+    finalizedBy 'reobfJar'
+}
+
+tasks.register('sourceJar', Jar) {
+    dependsOn 'classes'
+    from sourceSets.main.allSource
+    archiveClassifier = 'sources'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

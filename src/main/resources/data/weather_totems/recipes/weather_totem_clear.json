@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+
+  "key": {
+    "A": {
+      "item": "minecraft:totem_of_undying"
+    }
+  },
+
+  "pattern": [
+    "A"
+  ],
+
+  "result": {
+    "item": "weather_totems:weather_totem_clear"
+  }
+}

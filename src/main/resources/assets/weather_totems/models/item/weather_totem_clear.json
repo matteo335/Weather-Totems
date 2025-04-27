@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "weather_totems:item/weather_totem_clear"
+  }
+}
