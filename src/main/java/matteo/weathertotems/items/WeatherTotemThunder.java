@@ -41,7 +41,6 @@ public class WeatherTotemThunder extends Item {
                 player -> player.broadcastBreakEvent(player.getUsedItemHand())
         );
  */
-
         if (!level.isClientSide()) {
         pSource.getLevel().setWeatherParameters(0, 12000, true, true);
             pSource.sendSuccess(() -> Component.translatable("weather_totems.setThunder"/* + $$5*/), true);

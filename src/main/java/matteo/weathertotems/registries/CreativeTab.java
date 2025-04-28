@@ -4,26 +4,22 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.bus.api.IEventBus;
 
 import matteo.weathertotems.WeatherTotem;
+
+import java.util.function.Supplier;
 
 public class CreativeTab {
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, WeatherTotem.MOD_ID);
 
-    private static final RegistryObject<CreativeModeTab> WEATHER_TOTEM_THUNDER = CREATIVE_MODE_TABS.register("weather_totems_item", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
-            .icon(() -> WeatherTotemItems.WEATHER_TOTEM_THUNDER.get().asItem().getDefaultInstance())
+    public static final Supplier<CreativeModeTab> WEATHER_TOTEMS_TAB = CREATIVE_MODE_TABS.register(WeatherTotem.MOD_ID, () -> CreativeModeTab.builder()
+            .icon(() -> WeatherTotemItems.WEATHER_TOTEM_CLEAR.get().asItem().getDefaultInstance())
             .title(Component.translatable("Weather Totems"))
-            .displayItems((ctx, entry) -> {
-
-                entry.accept(WeatherTotemItems.WEATHER_TOTEM_THUNDER.get());
-                entry.accept(WeatherTotemItems.WEATHER_TOTEM_RAIN.get());
-                entry.accept(WeatherTotemItems.WEATHER_TOTEM_CLEAR.get());
-            }).build());
-
+            .displayItems((parameters, output) -> WeatherTotemItems.CREATIVE_TAB_ITEMS.forEach((item) -> output.accept(item.get())))
+            .build());
 
     public static void register(IEventBus event) {
         CREATIVE_MODE_TABS.register(event);

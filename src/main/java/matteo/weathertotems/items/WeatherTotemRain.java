@@ -10,7 +10,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerLevel;
 
+import net.neoforged.neoforge.common.UsernameCache;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
 
 public class WeatherTotemRain extends Item {
 
@@ -34,7 +37,7 @@ public class WeatherTotemRain extends Item {
 
         if (!level.isClientSide()) {
             pSource.getLevel().setWeatherParameters(0, 12000, true, false);
-            pSource.sendSuccess(() -> Component.translatable("weather_totems.setRain"), true);
+            pSource.sendSuccess(() -> Component.translatable("weather_totems.setRain" + UsernameCache.getLastKnownUsername(UUID.randomUUID())), true);
         }
     }
 }

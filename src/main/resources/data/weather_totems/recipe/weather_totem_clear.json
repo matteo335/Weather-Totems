@@ -5,17 +5,14 @@
   "key": {
     "A": {
       "item": "minecraft:totem_of_undying"
-    },
-    "B": {
-      "item": "weather_totems:weather_totem_rain"
     }
   },
 
   "pattern": [
-  "AB"
+    "A"
   ],
 
   "result": {
-    "item": "weather_totems:weather_totem_thunder"
+    "id": "weather_totems:weather_totem_clear"
   }
 }

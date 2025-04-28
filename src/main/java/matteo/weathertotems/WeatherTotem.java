@@ -1,11 +1,7 @@
 package matteo.weathertotems;
 
-
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.IExtensionPoint;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.bus.api.IEventBus;
 
 import matteo.weathertotems.registries.WeatherTotemItems;
 import matteo.weathertotems.registries.CreativeTab;
@@ -20,11 +16,7 @@ public class WeatherTotem {
     public static final Logger LOGGER = LogManager.getLogger();
 
 
-    public WeatherTotem() {
-        ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> "", (c, b) -> true));
-
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+    public WeatherTotem(IEventBus eventBus) {
         WeatherTotem.init();
         WeatherTotemItems.register(eventBus);
         CreativeTab.register(eventBus);
@@ -32,7 +24,6 @@ public class WeatherTotem {
 
     public static void init() {
         WeatherTotemItems.init();
-
 
         LOGGER.info("Weather Totem is baking");
     }

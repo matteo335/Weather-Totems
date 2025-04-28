@@ -7,7 +7,7 @@
       "item": "minecraft:totem_of_undying"
     },
     "B": {
-      "item": "minecraft:water_bucket"
+      "item": "weather_totems:weather_totem_rain"
     }
   },
 
@@ -16,6 +16,6 @@
   ],
 
   "result": {
-    "item": "weather_totems:weather_totem_rain"
+    "id": "weather_totems:weather_totem_thunder"
   }
 }
