@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "weather_totems:item/weather_totem_clear"
+  }
+}

@@ -1,15 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
 
-  "key": {
-    "A": {
-      "item": "minecraft:totem_of_undying"
-    }
-  },
-
-  "pattern": [
-    "A"
+  "ingredients": [
+    "minecraft:totem_of_undying"
   ],
 
   "result": {
