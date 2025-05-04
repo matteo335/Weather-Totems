@@ -6,14 +6,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 
-import net.neoforged.neoforge.common.UsernameCache;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.UUID;
 
 public class WeatherTotemRain extends Item {
 
@@ -24,20 +23,21 @@ public class WeatherTotemRain extends Item {
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level world, @NotNull Player entity, @NotNull InteractionHand hand) {
         InteractionResultHolder<ItemStack> ron = super.use(world, entity, hand);
         CommandSourceStack pSource = entity.createCommandSourceStack();
+        ItemStack itemStack = entity.getItemInHand(hand);
 
-
-        //if (!world.isClientSide() && world.getServer() != null) { world.getServer().getPlayerList().broadcastSystemMessage(Component.literal("§r§5 Someone changed the weather to Raining using a Weather Totem. If nothing is happening it's in cooldown"), false); }
-        if (!world.isClientSide()) { setRain(pSource); }
-
+        if (!world.isClientSide()) {
+            setRain(pSource, entity);
+            itemStack.hurtAndBreak(1, entity, EquipmentSlot.MAINHAND);
+        }
         return ron;
     }
 
-    public void setRain(CommandSourceStack pSource) {
+    public void setRain(CommandSourceStack pSource, Player player) {
         ServerLevel level = pSource.getLevel();
 
         if (!level.isClientSide()) {
             pSource.getLevel().setWeatherParameters(0, 12000, true, false);
-            pSource.sendSuccess(() -> Component.translatable("weather_totems.setRain" + UsernameCache.getLastKnownUsername(UUID.randomUUID())), true);
+            pSource.sendSuccess(() -> Component.translatable((player.getName().getString() + " Has summoned the rain for 10 minutes using a Weather Totem")), true);
         }
     }
 }

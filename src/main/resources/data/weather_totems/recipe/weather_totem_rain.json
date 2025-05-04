@@ -1,18 +1,14 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
 
-  "key": {
-    "A": {
+  "ingredients": [
+    {
       "item": "minecraft:totem_of_undying"
     },
-    "B": {
-      "item": "minecraft:water_bucket"
+    {
+      "item": "minecraft:potion"
     }
-  },
-
-  "pattern": [
-  "AB"
   ],
 
   "result": {

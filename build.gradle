@@ -12,19 +12,6 @@ tasks.named('wrapper', Wrapper).configure {
 
 version = "${minecraft_version}-${mod_version}"
 
-repositories {
-    maven {
-        // JEI
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        // CraftTweaker
-        name = "BlameJared"
-        url = "https://maven.blamejared.com"
-    }
-    maven { url "https://maven.ryanliptak.com/" }
-}
 
 base {
     archivesName = "${mod_id}-${minecraft_version}"

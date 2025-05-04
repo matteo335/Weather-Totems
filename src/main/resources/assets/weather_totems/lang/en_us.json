@@ -1,8 +1,5 @@
 {
   "item.weather_totems.weather_totem_thunder": "Thunder Totem",
   "item.weather_totems.weather_totem_rain": "Rain Totem",
-  "item.weather_totems.weather_totem_clear": "Clearing Totem",
-  "weather_totems.setThunder": "A weather totem summoned the thunder for 10 minute",
-  "weather_totems.setRain": "A weather totem summoned the rain for 10 minute",
-  "weather_totems.setClear": "A weather totem cleared the weather"
+  "item.weather_totems.weather_totem_clear": "Clearing Totem"
 }
