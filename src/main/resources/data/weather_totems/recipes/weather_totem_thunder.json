@@ -1,18 +1,14 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
 
-  "key": {
-    "A": {
-      "item": "minecraft:totem_of_undying"
-    },
-    "B": {
+  "ingredients": [
+    {
       "item": "weather_totems:weather_totem_rain"
+    },
+    {
+      "item": "minecraft:lightning_rod"
     }
-  },
-
-  "pattern": [
-  "AB"
   ],
 
   "result": {

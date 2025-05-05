@@ -2,7 +2,6 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    //id 'net.neoforged.gradle' version '[6.0.18,6.2)'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1+'
 }
@@ -33,17 +32,17 @@ minecraft {
     }
 
         client {
-            taskName "Minecraft_Client_${minecraft_version}"
+            taskName "client"
             property 'forge.enabledGameTestNamespaces', mod_id
         }
 
         gameTestServer {
-            taskName "Minecraft_GameTestServer_${minecraft_version}"
+            taskName "server"
             property "forge.enabledGameTestNamespaces", mod_id
         }
 
         data {
-            taskName "Minecraft_Data_${minecraft_version}"
+            taskName "data"
             workingDirectory project.file('run-data')
             args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
         }
@@ -60,7 +59,6 @@ dependencies {
 
 tasks.named('jar', Jar).configure {
     manifest {
-        archiveClassifier = 'universal'
         attributes([
                 'Specification-Title': mod_id,
                 'Specification-Vendor': "Matteo",

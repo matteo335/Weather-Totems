@@ -18,23 +18,24 @@ public class WeatherTotemRain extends Item {
         super(properties);
     }
 
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level world, @NotNull Player entity, @NotNull InteractionHand hand) {
-        InteractionResultHolder<ItemStack> ron = super.use(world, entity, hand);
-        CommandSourceStack pSource = entity.createCommandSourceStack();
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level world, @NotNull Player player, @NotNull InteractionHand hand) {
+        InteractionResultHolder<ItemStack> ron = super.use(world, player, hand);
+        CommandSourceStack pSource = player.createCommandSourceStack();
+        ItemStack itemStack = player.getItemInHand(hand);
 
-
-        //if (!world.isClientSide() && world.getServer() != null) { world.getServer().getPlayerList().broadcastSystemMessage(Component.literal("§r§5 Someone changed the weather to Raining using a Weather Totem. If nothing is happening it's in cooldown"), false); }
-        if (!world.isClientSide()) { setRain(pSource); }
-
+        if (!world.isClientSide()) {
+            setRain(pSource, player);
+            itemStack.hurtAndBreak(1, player, (entity) -> player.broadcastBreakEvent(player.getUsedItemHand()));
+        }
         return ron;
     }
 
-    public void setRain(CommandSourceStack pSource) {
+    public void setRain(CommandSourceStack pSource, Player player) {
         ServerLevel level = pSource.getLevel();
 
         if (!level.isClientSide()) {
             pSource.getLevel().setWeatherParameters(0, 12000, true, false);
-            pSource.sendSuccess(() -> Component.translatable("weather_totems.setRain"), true);
+            pSource.sendSuccess(() -> Component.translatable(player.getName().getString() + " has summoned the rain for 10 minutes using a Weather Totem"), true);
         }
     }
 }
