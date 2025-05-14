@@ -2,6 +2,7 @@ package matteo.weathertotems.items;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.InteractionResultHolder;
@@ -10,6 +11,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.server.level.ServerLevel;
+
+import static matteo.weathertotems.registries.ModConfig.ClearDurationNotRandom;
+import static matteo.weathertotems.registries.ModConfig.ClearTime;
+
+import static matteo.weathertotems.registries.ModConfig.ShowNotification;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,8 +41,8 @@ public class WeatherTotemClear extends Item {
         ServerLevel level = pSource.getLevel();
 
         if (!level.isClientSide()) {
-            pSource.getLevel().setWeatherParameters(0, 12000, false, false); //The value in pWeatherTime is to prevent Vanilla from setting the weather back to rain immediately after, which can happens
-            pSource.sendSuccess(() -> Component.translatable(player.getName().getString() + " Has cleared the weather using a Weather Totem"), true);
+            pSource.getLevel().setWeatherParameters(ClearTime.get(), ClearDurationNotRandom.get(), false, false);
+            level.getServer().getPlayerList().broadcastSystemMessage(Component.translatable(player.getName().getString() + " has cleared the weather using a Weather Totem"), ShowNotification.get());
         }
     }
 }
