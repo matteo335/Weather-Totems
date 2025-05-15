@@ -24,7 +24,7 @@ public class WeatherTotemItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, WeatherTotem.MOD_ID);
 
-    public static final RegistryObject<Item> WEATHER_TOTEM_THUNDER = registerItem("weather_totem_thunder", () -> new WeatherTotemThunder((new Item.Properties()).stacksTo(1).durability(3).defaultDurability(3).rarity(Rarity.EPIC))); //Is it trash code? Maybe. Is it working? Yes.
+    public static final RegistryObject<Item> WEATHER_TOTEM_THUNDER = registerItem("weather_totem_thunder", () -> new WeatherTotemThunder((new Item.Properties()).stacksTo(1).durability(3).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> WEATHER_TOTEM_RAIN = registerItem("weather_totem_rain", () -> new WeatherTotemRain((new Item.Properties()).stacksTo(1).durability(3).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> WEATHER_TOTEM_CLEAR = registerItem("weather_totem_clear", () -> new WeatherTotemClear((new Item.Properties()).stacksTo(1).durability(3).rarity(Rarity.EPIC)));
 

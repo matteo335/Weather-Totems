@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 
 import matteo.weathertotems.registries.WeatherTotemItems;
 import matteo.weathertotems.registries.CreativeTab;
+import matteo.weathertotems.registries.ModConfig;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +18,7 @@ import org.apache.logging.log4j.LogManager;
 public class WeatherTotem {
 
     public static final String MOD_ID = "weather_totems";
-    public static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger("Weather Totems");
 
 
     public WeatherTotem() {
@@ -28,12 +29,14 @@ public class WeatherTotem {
         WeatherTotem.init();
         WeatherTotemItems.register(eventBus);
         CreativeTab.register(eventBus);
+
+        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ModConfig.CONFIG_SPEC);
     }
 
     public static void init() {
         WeatherTotemItems.init();
 
 
-        LOGGER.info("Weather Totem is baking");
+        LOGGER.info("Baking");
     }
 }
